@@ -2,16 +2,8 @@
 for argument in "$@"
 do
 case $argument in
-	toinitialcommit)
-		rm -rfv .git
-		git init
-		git add --all
-		git commit -m "to initial commit"
-		git remote add origin https://github.com/albraga/cvue.git
-		git push -u --force origin master
-	;;
 	www)
-		rm -rfv www
+		rm -rfv www hooks
 		mkdir www
 		cd www
 		wget https://raw.githubusercontent.com/albraga/cvue/master/www/index.html
@@ -35,52 +27,13 @@ case $argument in
 	hook)
 		sed -i 's/<\/widget>/ <hook src="scripts\/vueify-build.js" type="before_compile" \/> <\/widget>/g' config.xml
 	;;
-	assemble_docs_2_githubpages)
-		mkdir docs
-		mv -fv staticdata docs/
-		mv -fv index.html docs/
-		mv -fv dist docs/
-	;;
-	lint)
-	# add to .eslintrc.js
-	# "rules": {
-	# "no-console": "off",
-					./node_modules/.bin/eslint --ext .js,.vue src; exit 0
-	;;
-	eslintinit)
-					./node_modules/.bin/eslint --init
-	;;
-	static)
-					rm -rfv static && mkdir -v static
-					cd static
-					wget -O temp.zip "https://jqueryui.com/resources/download/jquery-ui-1.12.1.zip"
-					unzip temp.zip && rm temp.zip
-					mv jquery-ui-1.12.1 jquery-ui
-					cd jquery-ui
-					rm AUTHORS.txt
-					rm index.html
-					rm jquery-ui.css
-					rm jquery-ui.js
-					rm jquery-ui.structure.css
-					rm jquery-ui.theme.css
-					rm LICENSE.txt
-					rm package.json
-					cd ..
-					wget -O temp.zip "https://github.com/twbs/bootstrap/releases/download/v3.3.7/bootstrap-3.3.7-dist.zip"
-					unzip temp.zip && rm temp.zip
-					mv bootstrap-3.3.7-dist bootstrap
-					cd bootstrap/css
-					rm bootstrap.css 
-					rm bootstrap.css.map 
-					rm bootstrap.min.css.map 
-					rm bootstrap-theme.css 
-					rm bootstrap-theme.css.map 
-					rm bootstrap-theme.min.css.map
-					cd ../js
-					rm bootstrap.js
-					rm npm.js
-					cd ../..
-					wget https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js
+	toinitialcommit)
+		rm -rfv .git
+		git init
+		git add --all
+		git commit -m "to initial commit"
+		git remote add origin https://github.com/albraga/cvue.git
+		git push -u --force origin master
 	;;
 esac
 done
